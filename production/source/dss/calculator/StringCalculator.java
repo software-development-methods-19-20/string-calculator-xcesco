@@ -18,6 +18,7 @@ public class StringCalculator {
         List<String> negativeNumberStrings = new ArrayList<>();
         int value = numbers.isEmpty() ? 0 : Arrays.stream(numbers.split(separator))
                 .map(Integer::valueOf)
+                .filter(item -> item < 1000)
                 .map(item -> {
                     if (item < 0) negativeNumberStrings.add("" + item);
                     return item;

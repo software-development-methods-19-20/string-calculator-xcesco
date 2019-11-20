@@ -60,4 +60,9 @@ public class AddNumbersTest {
         assertThat(exception.getMessage(), is("Negatives not allowed -1"));
     }
 
+    @Test
+    void ignoreNumberGT1000() {
+        assertThat(StringCalculator.add("2,1001"), is(2));
+    }
+
 }
