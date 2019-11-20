@@ -23,4 +23,9 @@ public class AddNumbersTest {
         assertThat(StringCalculator.add("1,2"), is(3));
     }
 
+    @Test
+    void fiveNumber() {
+        assertThat(StringCalculator.add("1,2,3,4,5"), is(15));
+    }
+
 }
