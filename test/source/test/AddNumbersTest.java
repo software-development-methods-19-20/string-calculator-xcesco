@@ -65,4 +65,9 @@ public class AddNumbersTest {
         assertThat(StringCalculator.add("2,1001"), is(2));
     }
 
+    @Test
+    void separatorOfAnySize() {
+        assertThat(StringCalculator.add("//[:::]\\n1:::2:::3"), is(6));
+    }
+
 }

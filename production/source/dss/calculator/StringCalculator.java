@@ -8,20 +8,11 @@ public class StringCalculator {
     static final String SEPARATOR_PARTS = "\\n";
     static final String BEGIN_SEPARATOR_PART = "//";
 
-    public static int add(String numbers) {
-        String separator = "[,\n]";
-        if (numbers.startsWith(BEGIN_SEPARATOR_PART) && numbers.indexOf(SEPARATOR_PARTS) > 0) {
-            int indexOfBeginNumbers = numbers.indexOf(SEPARATOR_PARTS);
-            separator = numbers.substring(BEGIN_SEPARATOR_PART.length(), indexOfBeginNumbers);
-            numbers = numbers.substring(indexOfBeginNumbers + SEPARATOR_PARTS.length());
-
-          /*  if (separator.startsWith("[") && separator.endsWith("]")) {
-                separator.substring(1, separator.length()-1).split("\\]\\[");
-            }*/
-
-        }
+    public static int add(String input) {
+        final String comma = ",";
+        String numbersPart = manageSplitterString(input);
         List<String> negativeNumberStrings = new ArrayList<>();
-        int value = numbers.isEmpty() ? 0 : Arrays.stream(numbers.split(separator))
+        int value = numbersPart.isEmpty() ? 0 : Arrays.stream(numbersPart.split(comma))
                 .map(Integer::valueOf)
                 .filter(item -> item < 1000)
                 .map(item -> {
@@ -35,5 +26,24 @@ public class StringCalculator {
         }
 
         return value;
+    }
+
+    private static String manageSplitterString(String input) {
+        String numbersPart=input;
+        if (input.startsWith(BEGIN_SEPARATOR_PART) && input.indexOf(SEPARATOR_PARTS) > 0) {
+            int indexOfBeginNumbers = input.indexOf(SEPARATOR_PARTS);
+            String separatorPart = input.substring(BEGIN_SEPARATOR_PART.length(), indexOfBeginNumbers);
+            numbersPart = input.substring(indexOfBeginNumbers + SEPARATOR_PARTS.length());
+
+            if (separatorPart.startsWith("[") && separatorPart.endsWith("]")) {
+                separatorPart = separatorPart.substring(1, separatorPart.length() - 1);
+            }
+            for (String item : separatorPart.split("\\]\\[")) {
+                numbersPart = numbersPart.replaceAll(item, ",");
+            }
+        } else {
+            numbersPart = numbersPart.replaceAll("\n", ",");
+        }
+        return numbersPart;
     }
 }
