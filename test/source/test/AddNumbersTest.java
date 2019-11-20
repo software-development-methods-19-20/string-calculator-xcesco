@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddNumbersTest {
 
@@ -41,6 +42,22 @@ public class AddNumbersTest {
     @Test
     void supportCustomDelimiter() {
         assertThat(StringCalculator.add("//;\\n1;2"), is(3));
+    }
+
+    @Test
+    void negativeNumberWithCustomDelimiter() {
+        RuntimeException exception=assertThrows(RuntimeException.class, () -> {
+            StringCalculator.add("//;\\n-1;2");
+        });
+        assertThat(exception.getMessage(), is("Negatives not allowed -1"));
+    }
+
+    @Test
+    void negativeNumberWithStandardDelimiter() {
+        RuntimeException exception=assertThrows(RuntimeException.class, () -> {
+            StringCalculator.add("-1,2");
+        });
+        assertThat(exception.getMessage(), is("Negatives not allowed -1"));
     }
 
 }
