@@ -1,3 +1,5 @@
+**Ok, finished! :ok_hand:**
+
 # String Calculator assignment
 
 This assignment is a variant of the TDD Kata by Roy Osherove ([original exercise description](http://osherove.com/tdd-kata-1/)).
