@@ -7,8 +7,6 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
-    static final String SEPARATOR_PARTS = "\\n";
-    static final String BEGIN_SEPARATOR_PART = "//";
 
     public static int add(String input) {
         final String comma = ",";
@@ -34,6 +32,9 @@ public class StringCalculator {
     }
 
     private static String manageSplitterString(String input) {
+        final String SEPARATOR_PARTS = "\\n";
+        final String BEGIN_SEPARATOR_PART = "//";
+
         String numbersPart = input;
         if (input.startsWith(BEGIN_SEPARATOR_PART) && input.indexOf(SEPARATOR_PARTS) > 0) {
             int indexOfBeginNumbers = input.indexOf(SEPARATOR_PARTS);
