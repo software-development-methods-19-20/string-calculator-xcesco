@@ -14,6 +14,11 @@ public class StringCalculator {
             int indexOfBeginNumbers = numbers.indexOf(SEPARATOR_PARTS);
             separator = numbers.substring(BEGIN_SEPARATOR_PART.length(), indexOfBeginNumbers);
             numbers = numbers.substring(indexOfBeginNumbers + SEPARATOR_PARTS.length());
+
+          /*  if (separator.startsWith("[") && separator.endsWith("]")) {
+                separator.substring(1, separator.length()-1).split("\\]\\[");
+            }*/
+
         }
         List<String> negativeNumberStrings = new ArrayList<>();
         int value = numbers.isEmpty() ? 0 : Arrays.stream(numbers.split(separator))
