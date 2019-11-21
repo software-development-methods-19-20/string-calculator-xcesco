@@ -3,6 +3,7 @@ package dss.calculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
@@ -26,15 +27,14 @@ public class StringCalculator {
     }
 
     private static Integer sumValidAndCollectNegativeNumbers(String numbersPart, List<String> negativeNumberStrings) {
-        Function<Integer, Integer> convertAndFindNegativeNumbers = value -> {
+        Consumer<Integer> collectNegativeNumbers = value -> {
             if (value < 0) negativeNumberStrings.add("" + value);
-            return value;
         };
 
         return Arrays.stream(numbersPart.split(Pattern.quote(COMMA_SEPARATOR)))
                 .map(Integer::valueOf)
                 .filter(item -> item < 1000)
-                .map(convertAndFindNegativeNumbers::apply)
+                .peek(collectNegativeNumbers)
                 .reduce(0, Integer::sum);
     }
 
