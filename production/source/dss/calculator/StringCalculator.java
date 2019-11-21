@@ -10,7 +10,7 @@ public class StringCalculator {
 
     public static int add(String input) {
         final String comma = ",";
-        String numbersPart = manageSplitterString(input);
+        String numbersPart = manageDividers(input);
         List<String> negativeNumberStrings = new ArrayList<>();
 
         Function<Integer, Integer> convertAndFindNegativeNumbers = value -> {
@@ -31,7 +31,7 @@ public class StringCalculator {
         return value;
     }
 
-    private static String manageSplitterString(String input) {
+    private static String manageDividers(String input) {
         final String SEPARATOR_PARTS = "\\n";
         final String BEGIN_SEPARATOR_PART = "//";
 
