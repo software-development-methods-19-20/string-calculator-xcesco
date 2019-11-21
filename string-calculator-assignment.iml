@@ -10,7 +10,7 @@
     <content url="file://$MODULE_DIR$/test">
       <sourceFolder url="file://$MODULE_DIR$/test/source" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="13" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="test-lib" level="project" />
   </component>
