@@ -41,13 +41,13 @@ public class AddNumbersTest {
 
     @Test
     void supportCustomDelimiter() {
-        assertThat(StringCalculator.add("//;\\n1;2"), is(3));
+        assertThat(StringCalculator.add("//;\n1;2"), is(3));
     }
 
     @Test
     void negativeNumberWithCustomDelimiter() {
         RuntimeException exception=assertThrows(RuntimeException.class, () -> {
-            StringCalculator.add("//;\\n-1;2");
+            StringCalculator.add("//;\n-1;2");
         });
         assertThat(exception.getMessage(), is("Negatives not allowed -1"));
     }
@@ -67,17 +67,17 @@ public class AddNumbersTest {
 
     @Test
     void separatorOfAnySize() {
-        assertThat(StringCalculator.add("//[:::]\\n1:::2:::3"), is(6));
+        assertThat(StringCalculator.add("//[:::]\n1:::2:::3"), is(6));
     }
 
     @Test
     void multipleSeparatorSize() {
-        assertThat(StringCalculator.add("//[:][°]\\n1:2°3"), is(6));
+        assertThat(StringCalculator.add("//[:][°]\n1:2°3"), is(6));
     }
 
     @Test
     void multipleSeparatorOfAnySizeSize() {
-        assertThat(StringCalculator.add("//[::][°][^^^^]\\n1::2°3^^^^4"), is(10));
+        assertThat(StringCalculator.add("//[::][°][^^^^]\n1::2°3^^^^4"), is(10));
     }
 
 }
