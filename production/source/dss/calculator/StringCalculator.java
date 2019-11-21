@@ -39,11 +39,12 @@ public class StringCalculator {
     }
 
     private static String extractNumbersAndReplaceSeparators(String input) {
+        final String CRLF_SEPARATOR="\n";
         String numbersPart = input;
         if (input.startsWith(BEGIN_SEPARATOR_PART) && input.indexOf(DIVIDER_BETWEEN_SEPARATORS_AND_NUMBERS) > 0) {
             numbersPart = extractCustomSeparators(input);
         } else {
-            numbersPart = numbersPart.replaceAll("\n", COMMA_SEPARATOR);
+            numbersPart = numbersPart.replaceAll(CRLF_SEPARATOR, COMMA_SEPARATOR);
         }
         return numbersPart;
     }
