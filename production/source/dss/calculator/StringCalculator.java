@@ -8,31 +8,34 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    final static String DIVIDER_BETWEEN_SEPARATORS_AND_NUMBERS = "\n";
-    final static String BEGIN_SEPARATOR_PART = "//";
-    final static String COMMA_SEPARATOR = ",";
+    private final static String DIVIDER_BETWEEN_SEPARATORS_AND_NUMBERS = "\n";
+    private final static String BEGIN_SEPARATOR_PART = "//";
+    private final static String COMMA_SEPARATOR = ",";
 
     public static int add(String input) {
-        final String comma = ",";
         String numbersPart = extractNumbersAndReplaceSeparators(input);
         List<String> negativeNumberStrings = new ArrayList<>();
 
+        int value = numbersPart.isEmpty() ? 0 : sumValidAndFindInvalidValues(numbersPart, negativeNumberStrings);
+
+        if (negativeNumberStrings.size() > 0) {
+            throw new RuntimeException("Negatives not allowed " + String.join(Pattern.quote(COMMA_SEPARATOR), negativeNumberStrings));
+        }
+
+        return value;
+    }
+
+    private static Integer sumValidAndFindInvalidValues(String numbersPart, List<String> negativeNumberStrings) {
         Function<Integer, Integer> convertAndFindNegativeNumbers = value -> {
             if (value < 0) negativeNumberStrings.add("" + value);
             return value;
         };
 
-        int value = numbersPart.isEmpty() ? 0 : Arrays.stream(numbersPart.split(comma))
+        return Arrays.stream(numbersPart.split(Pattern.quote(COMMA_SEPARATOR)))
                 .map(Integer::valueOf)
                 .filter(item -> item < 1000)
                 .map(convertAndFindNegativeNumbers::apply)
                 .reduce(0, Integer::sum);
-
-        if (negativeNumberStrings.size() > 0) {
-            throw new RuntimeException("Negatives not allowed " + String.join(",", negativeNumberStrings));
-        }
-
-        return value;
     }
 
     private static String extractNumbersAndReplaceSeparators(String input) {
