@@ -16,7 +16,7 @@ public class StringCalculator {
         String numbersPart = extractNumbersAndReplaceSeparators(input);
         List<String> negativeNumberStrings = new ArrayList<>();
 
-        int value = numbersPart.isEmpty() ? 0 : sumValidAndFindInvalidValues(numbersPart, negativeNumberStrings);
+        int value = numbersPart.isEmpty() ? 0 : sumValidAndCollectNegativeNumbers(numbersPart, negativeNumberStrings);
 
         if (negativeNumberStrings.size() > 0) {
             throw new RuntimeException("Negatives not allowed " + String.join(Pattern.quote(COMMA_SEPARATOR), negativeNumberStrings));
@@ -25,7 +25,7 @@ public class StringCalculator {
         return value;
     }
 
-    private static Integer sumValidAndFindInvalidValues(String numbersPart, List<String> negativeNumberStrings) {
+    private static Integer sumValidAndCollectNegativeNumbers(String numbersPart, List<String> negativeNumberStrings) {
         Function<Integer, Integer> convertAndFindNegativeNumbers = value -> {
             if (value < 0) negativeNumberStrings.add("" + value);
             return value;
